@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="app_name">Daftar Tontonan</string>
+
+    <string name="hello_blank_fragment">Hello Fragment Kosong</string>
+    <string name="movie_title">Film</string>
+    <string name="tv_show_title">Seri</string>
+    <string name="deskripsi_movie">Deskripsi </string>
+    <string name="nama_movie">Nama </string>
+
+    <string name="change_language_settings">Ubah Pengaturan Bahasa</string>
+    <string name="story">Cerita:</string>
+    <string name="rating">Penilaian</string>
+
+</resources>
