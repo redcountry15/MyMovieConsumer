@@ -17,11 +17,6 @@ class MovieAdapter(private val List:ArrayList<Movie>): RecyclerView.Adapter<Movi
         this.onItemClickCallback = onItemClickCallback
     }
 
- /*   fun setMovie(items:ArrayList<Movie>){
-        List.clear()
-        List.addAll(items)
-        notifyDataSetChanged()
-    }*/
 
 
     inner class MovieViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {

@@ -76,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/lato"
-        android:text="Weathering With You"
+        android:text="@string/weathering_with_you"
         android:textColor="#fff"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -141,6 +141,17 @@
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/re" />
+
+    <ImageView
+        android:id="@+id/img_button_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="212dp"
+        android:layout_marginStart="70dp"
+        android:background="@drawable/ic_favorite_border_white_24dp"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

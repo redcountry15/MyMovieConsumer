@@ -8,20 +8,19 @@ import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.FragmentManager
-import com.example.submisi3_made_dicoding.Adapter.SectionPageAdapter
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val sectionPager = SectionPageAdapter(this,supportFragmentManager)
-            view_pager.adapter = sectionPager
-            tab_layout.setupWithViewPager(view_pager)
-
         supportActionBar?.elevation = 0f
+
+        val navController = findNavController(R.id.nav_host_fragment)
+        nav_view.setupWithNavController(navController)
 
     }
 
@@ -37,4 +36,8 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+
+
+
 }

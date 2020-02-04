@@ -45,7 +45,7 @@ class ShowFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         tvShowViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(TvShowViewModel::class.java)
-        tvShowViewModel.show.observe(this,getShowList)
+        tvShowViewModel.show.observe(viewLifecycleOwner,getShowList)
         tvShowViewModel.setShow()
 
         progresBar.visibility = View.VISIBLE

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/nav_home"
+    android:id="@+id/mobile_navigation.xml">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.submisi3_made_dicoding.Fragment.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home"
+        />
+
+    <fragment
+        android:id="@+id/nav_fav"
+        android:name="com.example.submisi3_made_dicoding.favorite.FavoriteFragment"
+        android:label="Favorite"
+        tools:layout="@layout/fragment_favorite"
+        />
+
+</navigation>

@@ -40,15 +40,13 @@ class MovieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         movieViewModel = ViewModelProvider(this,ViewModelProvider.NewInstanceFactory()).get(MovieViewModel::class.java)
-        movieViewModel.movies.observe(this,getMovieList)
+        movieViewModel.movies.observe(viewLifecycleOwner,getMovieList)
         movieViewModel.setMovie()
 
 
         progresBar2.visibility = View.VISIBLE
 
     }
-
-
         //get Movie List
         private val getMovieList =
             Observer<ArrayList<Movie>> { movie ->

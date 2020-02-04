@@ -11,5 +11,9 @@
     <string name="change_language_settings">Change Language Settings</string>
     <string name="story">Story:</string>
     <string name="rating">Rating</string>
+    <string name="favourite">Favorite</string>
+    <string name="home">Home</string>
+    <string name="favorite">Favorite</string>
+    <string name="weathering_with_you">Weathering With You</string>
 
 </resources>
