@@ -32,12 +32,19 @@ class Details : AppCompatActivity() {
 
     companion object{
         val DATA_MOVIE = "EXTRA_MOVIE"
+        val MOV = "ordinary_mov"
+
+        //type
         val DATA_TYPE = "EXTRA_TYPE"
+
+        //favorite
         val DATA_MOVIE_FAVORITE = "EXTRA_MOVIE_FAVORITE"
+        val MOV_FAV = "fav_movie"
     }
     lateinit var movie:Movie
     lateinit var movieHelper:MovieHelper
     lateinit var  type:String
+    lateinit var  typeGet:String
     lateinit var  id: String
     lateinit var  title: String
     lateinit var rating: String
@@ -54,26 +61,67 @@ class Details : AppCompatActivity() {
         movieHelper.open()
 
         val intentData = intent.getParcelableExtra(DATA_MOVIE) as Movie
-        progressBarDetail.visibility = View.VISIBLE
+        typeGet = intent.getStringExtra(DATA_TYPE)
 
-        if (intentData != null){
+        if(intentData != null){
             progressBarDetail.visibility = View.GONE
         }
-        re.text = intentData.title
-        received_text_description.text = intentData.desc
-        received_text_rating.text = intentData.rating
 
-        //sorry if it's redundant , idk to load into both object in 1 glide
-        Glide.with(applicationContext)
-            .load("https://image.tmdb.org/t/p/w342/" + intentData.poster)
-            .into(image_poster)
-        Glide.with(applicationContext)
-            .load("https://image.tmdb.org/t/p/w342/" + intentData.poster)
-            .into(image_backdrop)
 
-        img_button_favorite.setOnClickListener{
-            favorMe()
+        when(typeGet){
+
+            DATA_MOVIE_FAVORITE ->{
+                val intentFavorite = intent.getParcelableExtra(DATA_MOVIE_FAVORITE) as Movie
+                progressBarDetail.visibility = View.GONE
+                re.text = intentFavorite.title
+                received_text_description.text = intentFavorite.desc
+                received_text_rating.text = intentFavorite.rating
+                //sorry if it's redundant , idk to load into both object in 1 glide
+                Glide.with(applicationContext)
+                    .load("https://image.tmdb.org/t/p/w342/" + intentFavorite.poster)
+                    .into(image_poster)
+                Glide.with(applicationContext)
+                    .load("https://image.tmdb.org/t/p/w342/" + intentFavorite.poster)
+                    .into(image_backdrop)
+
+                if(intentData != null){
+                    progressBarDetail.visibility = View.GONE
+                }
+
+                img_button_favorite.setOnClickListener{
+                    favorMe()
+                }
+                isFavorited = isThisAFavorite()
+
+            }
+
+            MOV -> {
+                progressBarDetail.visibility = View.VISIBLE
+                re.text = intentData.title
+                received_text_description.text = intentData.desc
+                received_text_rating.text = intentData.rating
+
+                //sorry if it's redundant , idk to load into both object in 1 glide
+                Glide.with(applicationContext)
+                    .load("https://image.tmdb.org/t/p/w342/" + intentData.poster)
+                    .into(image_poster)
+                Glide.with(applicationContext)
+                    .load("https://image.tmdb.org/t/p/w342/" + intentData.poster)
+                    .into(image_backdrop)
+
+                if(intentData != null){
+                    progressBarDetail.visibility = View.GONE
+                }
+                img_button_favorite.setOnClickListener{
+                    favorMe()
+                }
+            }
         }
+
+
+
+
+
         setData(intentData)
     }
 
@@ -85,6 +133,7 @@ class Details : AppCompatActivity() {
         poster = movie.poster
         type = "movie"
     }
+
 
     fun favorMe() {
         val values = ContentValues()

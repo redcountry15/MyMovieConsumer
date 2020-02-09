@@ -21,10 +21,13 @@ class FavoritePageAdapter(private val mContext: Context,fm:FragmentManager):Frag
     override fun getItem(position: Int): Fragment {
         var fragment:Fragment? = null
         when(position){
-            1-> MovieFavorite()
-            2->ShowFavorite()
+            0->fragment= MovieFavorite()
+            1->fragment =ShowFavorite()
         }
+
+
         return fragment as Fragment
+
 
     }
 

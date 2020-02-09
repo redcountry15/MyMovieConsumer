@@ -22,10 +22,8 @@ import kotlinx.android.synthetic.main.fragment_movie_favorite.*
  */
 class MovieFavorite : Fragment() {
 
-    companion object{
-        private lateinit var mvAdapter: MovieAdapter
-    }
 
+    private lateinit var mvAdapter: MovieAdapter
     lateinit var movieHelper: MovieHelper
     lateinit var fav: ArrayList<Movie>
     override fun onCreateView(
@@ -38,27 +36,26 @@ class MovieFavorite : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        movieHelper = MovieHelper.getInstance(context!!)
+      /* movieHelper = MovieHelper.getInstance(context!!)
         movieHelper.open()
         fav = movieHelper.getAllMovie()
 
         rv_favorite_movie.apply {
             mvAdapter = MovieAdapter(fav)
+            layoutManager = GridLayoutManager(activity,2)
+            adapter = mvAdapter
             mvAdapter.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback{
                 override fun onItemClicked(data: Movie) {
                     val intent = Intent(context, Details::class.java)
                     intent.putExtra(Details.DATA_TYPE,Details.DATA_MOVIE_FAVORITE)
-                    intent.putExtra(Details.DATA_MOVIE,data)
+                    intent.putExtra(Details.MOV_FAV,data)
                     startActivity(intent)
                 }
 
+
             })
-            rv_movie.apply {
-                layoutManager = GridLayoutManager(activity,2)
-                adapter = mvAdapter
-            }
             progresBar2.visibility = View.GONE
 
-        }
+        }*/
     }
 }

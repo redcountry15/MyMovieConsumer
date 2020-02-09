@@ -41,6 +41,7 @@ class FavoriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val sectionPager = FavoritePageAdapter(view.context,childFragmentManager)
+
         view_pager_fav.adapter = sectionPager
         tab_layout_fav.setupWithViewPager(view_pager_fav)
 
