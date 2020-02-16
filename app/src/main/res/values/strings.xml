@@ -15,5 +15,8 @@
     <string name="home">Home</string>
     <string name="favorite">Favorite</string>
     <string name="weathering_with_you">Weathering With You</string>
+    <string name="movieIsAdded">Favorite is Already Added!</string>
+    <string name="movieIsSucessfullyAdded">Favorite is Successfully Added</string>
+    <string name="favorite_deleted">Favorite is Successfully deleted</string>
 
 </resources>

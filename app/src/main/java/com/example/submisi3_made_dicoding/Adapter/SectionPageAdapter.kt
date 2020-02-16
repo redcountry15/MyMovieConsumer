@@ -5,8 +5,8 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.submisi3_made_dicoding.Fragment.MovieFragment
-import com.example.submisi3_made_dicoding.Fragment.ShowFragment
+import com.example.submisi3_made_dicoding.ui.Movie.MovieFragment
+import com.example.submisi3_made_dicoding.ui.TvShow.ShowFragment
 import com.example.submisi3_made_dicoding.R
 
 
@@ -24,8 +24,10 @@ class SectionPageAdapter(private val mContext:Context,fm:FragmentManager) : Frag
         var fragment:Fragment? = null
 
         when(position){
-            0-> fragment = MovieFragment()
-            1-> fragment = ShowFragment()
+            0-> fragment =
+                MovieFragment()
+            1-> fragment =
+                ShowFragment()
 
         }
         return fragment as Fragment

@@ -1,4 +1,4 @@
-package com.example.submisi3_made_dicoding.Fragment
+package com.example.submisi3_made_dicoding.ui.Movie
 
 
 import android.content.Intent
@@ -7,17 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.submisi3_made_dicoding.Adapter.MovieAdapter
-import com.example.submisi3_made_dicoding.Details
 import com.example.submisi3_made_dicoding.Model.Movie
 import com.example.submisi3_made_dicoding.R
 import com.example.submisi3_made_dicoding.ViewModel.MovieViewModel
 import kotlinx.android.synthetic.main.fragment_movie.*
-import kotlinx.android.synthetic.main.fragment_show.*
 
 /**
  * A simple [Fragment] subclass.
@@ -54,15 +51,16 @@ class MovieFragment : Fragment() {
                     movieAdapter = MovieAdapter(movie)
                     movieAdapter.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback{
                         override fun onItemClicked(data: Movie) {
-                              val intent = Intent(context,Details::class.java)
-                               intent.putExtra(Details.DATA_TYPE,Details.MOV)
-                              intent.putExtra(Details.DATA_MOVIE,data)
+                              val intent = Intent(context, DetailMovie::class.java)
+                               intent.putExtra(DetailMovie.DATA_TYPE, DetailMovie.MOV)
+                               intent.putExtra(DetailMovie.DATA_MOVIE,data)
                             startActivity(intent)
                         }
                     })
                     rv_movie.apply {
                         layoutManager = GridLayoutManager(activity,2)
-                        adapter = movieAdapter
+                        adapter =
+                            movieAdapter
                     }
                     progresBar2.visibility = View.GONE
                 }

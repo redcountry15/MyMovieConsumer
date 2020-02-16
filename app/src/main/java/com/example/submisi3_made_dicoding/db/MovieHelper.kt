@@ -44,6 +44,18 @@ class MovieHelper(context:Context) {
         database = databaseHelper.writableDatabase
     }
 
+    fun queryById(id:String):Cursor{
+        return database.query(
+            DATABASE_TABLE,
+            null,
+            "$ID = ?",
+            arrayOf(id),
+            null,
+            null,
+            null,
+            null)
+    }
+
     fun close() {
         databaseHelper.close()
 
@@ -71,9 +83,9 @@ class MovieHelper(context:Context) {
                 movie = Movie(
                     cursor.getString(cursor.getColumnIndexOrThrow(ID)),
                     cursor.getString(cursor.getColumnIndexOrThrow(TITLE)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(RATING)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(POSTER)),
                     cursor.getString(cursor.getColumnIndexOrThrow(DESCRIPTION)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(POSTER))
+                    cursor.getString(cursor.getColumnIndexOrThrow(RATING))
                 )
                 arrayList.add(movie)
                 cursor.moveToNext()
@@ -99,32 +111,6 @@ class MovieHelper(context:Context) {
             return true
         }
         return false
-    }
-
-    fun queryMovies(): Cursor{
-        return database.query(
-            DATABASE_TABLE,
-            null,
-            "$TYPE = 'movie'",
-            null,
-            null,
-            null,
-            "$ID ASC",
-            null
-        )
-
-    }
-    //got spoiler from my friend, on the last submission there is search function, so just in case .
-    fun queryById(id:String):Cursor{
-        return database.query(
-            DATABASE_TABLE,
-            null,
-            "$ID = ?",
-            arrayOf(id),
-            null,
-            null,
-            null,
-            null)
     }
 
     fun insertMovie(values:ContentValues): Long{

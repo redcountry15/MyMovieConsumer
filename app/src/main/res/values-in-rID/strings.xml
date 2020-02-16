@@ -16,5 +16,8 @@
     <string name="home">Rumah</string>
     <string name="favorite">Favorite</string>
     <string name="weathering_with_you">Weathering With You</string>
+    <string name="movieIsAdded">Film Sudah Ditambahkan!</string>
+    <string name="movieIsSucessfullyAdded">Favorite Berhasil Ditambahkan</string>
+    <string name="favorite_deleted">Favorite Berhasil Dihapus</string>
 
 </resources>

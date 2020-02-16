@@ -9,12 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.submisi3_made_dicoding.Adapter.MovieAdapter
-import com.example.submisi3_made_dicoding.Details
 import com.example.submisi3_made_dicoding.Model.Movie
 
 import com.example.submisi3_made_dicoding.R
 import com.example.submisi3_made_dicoding.db.MovieHelper
-import kotlinx.android.synthetic.main.fragment_movie.*
 import kotlinx.android.synthetic.main.fragment_movie_favorite.*
 
 /**
@@ -26,9 +24,7 @@ class MovieFavorite : Fragment() {
     private lateinit var mvAdapter: MovieAdapter
     lateinit var movieHelper: MovieHelper
     lateinit var fav: ArrayList<Movie>
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_movie_favorite, container, false)
@@ -36,26 +32,29 @@ class MovieFavorite : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-      /* movieHelper = MovieHelper.getInstance(context!!)
+
+        movieHelper = MovieHelper.getInstance(context!!)
         movieHelper.open()
         fav = movieHelper.getAllMovie()
+        mvAdapter = MovieAdapter(fav)
 
         rv_favorite_movie.apply {
-            mvAdapter = MovieAdapter(fav)
-            layoutManager = GridLayoutManager(activity,2)
             adapter = mvAdapter
+            layoutManager = GridLayoutManager(context,2)
+            setHasFixedSize(true)
             mvAdapter.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback{
                 override fun onItemClicked(data: Movie) {
-                    val intent = Intent(context, Details::class.java)
-                    intent.putExtra(Details.DATA_TYPE,Details.DATA_MOVIE_FAVORITE)
-                    intent.putExtra(Details.MOV_FAV,data)
+                    val intent = Intent(context, DetailMovieFavorite::class.java)
+                    intent.putExtra(DetailMovieFavorite.DATA_MOVIE_FAVORITE,data)
                     startActivity(intent)
                 }
-
-
             })
-            progresBar2.visibility = View.GONE
-
-        }*/
+        }
+    }
+    override fun onResume() {
+        super.onResume()
+        fav.clear()
+        fav.addAll(movieHelper.getAllMovie())
+        rv_favorite_movie.adapter?.notifyDataSetChanged()
     }
 }

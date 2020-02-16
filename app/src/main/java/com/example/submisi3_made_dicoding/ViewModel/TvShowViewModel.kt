@@ -3,6 +3,7 @@ package com.example.submisi3_made_dicoding.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.submisi3_made_dicoding.BuildConfig
 import com.example.submisi3_made_dicoding.Model.Movie
 import com.example.submisi3_made_dicoding.Model.TvShow
 import com.example.submisi3_made_dicoding.Utils.Const
@@ -29,7 +30,7 @@ class TvShowViewModel: ViewModel(){
 
     internal fun setShow(){
 
-        params.put("api_key",const.API_KEY)
+        params.put("api_key",BuildConfig.API_KEY)
         params.put("language","en-US")
 
         val client = AsyncHttpClient()

@@ -7,12 +7,15 @@ import org.json.JSONObject
 
 @Parcelize
 data class TvShow (
-    var title:String?,
-    var poster:String?,
-    var desc:String?,
-    var rating: String?
+    var id:String,
+    var title:String,
+    var poster:String,
+    var desc:String,
+    var rating: String
+
 ): Parcelable{
     constructor(objek: JSONObject): this(
+        objek.getString("id"),
         objek.getString("name"),
         objek.getString("poster_path"),
         objek.getString("overview"),

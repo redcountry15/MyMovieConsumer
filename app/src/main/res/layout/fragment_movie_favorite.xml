@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,7 +17,8 @@
         />
 
     <androidx.recyclerview.widget.RecyclerView
+        tools:listitem="@layout/model_view_favorite"
         android:id="@+id/rv_favorite_movie"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-</FrameLayout>
+</RelativeLayout>
