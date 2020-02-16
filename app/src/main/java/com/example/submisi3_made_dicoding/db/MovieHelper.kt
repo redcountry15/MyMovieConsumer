@@ -59,7 +59,7 @@ class MovieHelper(context:Context) {
     fun close() {
         databaseHelper.close()
 
-        if (database.isOpen())
+        if (database.isOpen)
             database.close()
     }
 
