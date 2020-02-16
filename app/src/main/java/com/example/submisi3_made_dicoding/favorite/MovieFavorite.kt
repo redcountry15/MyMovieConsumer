@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.submisi3_made_dicoding.Adapter.MovieAdapter
 import com.example.submisi3_made_dicoding.Model.Movie
 
@@ -40,7 +41,7 @@ class MovieFavorite : Fragment() {
 
         rv_favorite_movie.apply {
             adapter = mvAdapter
-            layoutManager = GridLayoutManager(context,2)
+            layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             mvAdapter.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback{
                 override fun onItemClicked(data: Movie) {

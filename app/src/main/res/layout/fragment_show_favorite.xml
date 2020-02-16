@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="40dp"
     tools:context=".favorite.ShowFavorite">
 
     <!-- TODO: Update blank fragment layout -->
@@ -17,6 +18,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_favorite_show"
+        tools:listitem="@layout/model_view_favorite"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.submisi3_made_dicoding.Adapter.MovieAdapter
 import com.example.submisi3_made_dicoding.Adapter.TvShowAdapter
 import com.example.submisi3_made_dicoding.Model.Movie
@@ -47,7 +48,7 @@ class ShowFavorite : Fragment() {
 
         rv_favorite_show.apply {
             adapter = showAdapter
-            layoutManager = GridLayoutManager(context,2)
+            layoutManager = LinearLayoutManager(context)
             showAdapter.setOnItemClickCallback(object : TvShowAdapter.OnItemClickCallback{
                 override fun onItemClicked(data: TvShow) {
                     val intent = Intent(context, DetailShowFavorite::class.java)

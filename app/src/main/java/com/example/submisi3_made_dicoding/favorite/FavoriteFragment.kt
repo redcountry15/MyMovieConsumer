@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import android.view.*
+import androidx.activity.ComponentActivity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.submisi3_made_dicoding.Adapter.FavoritePageAdapter
 import com.example.submisi3_made_dicoding.Adapter.SectionPageAdapter
@@ -44,6 +46,8 @@ class FavoriteFragment : Fragment() {
 
         view_pager_fav.adapter = sectionPager
         tab_layout_fav.setupWithViewPager(view_pager_fav)
+
+        (activity as AppCompatActivity).supportActionBar?.elevation = 0f
 
 
     }
