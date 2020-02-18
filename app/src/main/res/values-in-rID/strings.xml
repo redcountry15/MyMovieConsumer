@@ -19,5 +19,8 @@
     <string name="movieIsAdded">Film Sudah Ditambahkan!</string>
     <string name="movieIsSucessfullyAdded">Favorite Berhasil Ditambahkan</string>
     <string name="favorite_deleted">Favorite Berhasil Dihapus</string>
+    <string name="refersh">Menyegarkan....</string>
+    <string name="favorite_widgets">Favorite ke Widget</string>
+    <string name="excp_widget">Gabut disini juga</string>
 
 </resources>

@@ -18,5 +18,8 @@
     <string name="movieIsAdded">Favorite is Already Added!</string>
     <string name="movieIsSucessfullyAdded">Favorite is Successfully Added</string>
     <string name="favorite_deleted">Favorite is Successfully deleted</string>
+    <string name="favorite_widgets">Favorite Widgets</string>
+    <string name="excp_widget">Nothing to do Here</string>
+    <string name="refersh">Refreshing....</string>
 
 </resources>
