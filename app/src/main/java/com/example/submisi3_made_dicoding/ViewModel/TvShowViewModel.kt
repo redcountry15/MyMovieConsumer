@@ -71,4 +71,49 @@ class TvShowViewModel: ViewModel(){
 
         })
     }
+
+    internal fun searchShow(query:String){
+
+        params.put("api_key",BuildConfig.API_KEY)
+        params.put("language","en-US")
+        params.put("query",query)
+
+        val client = AsyncHttpClient()
+        val url = "https://api.themoviedb.org/3/search/tv?"
+
+        client.get(url,params,object:AsyncHttpResponseHandler(){
+            override fun onSuccess(statusCode: Int, headers: Array<out Header>?, responseBody: ByteArray) {
+                try {
+                    val result = String(responseBody)
+                    val response = JSONObject(result)
+                    val showList = response.getJSONArray("results")
+
+                    for (i in 0  until showList.length()){
+                        val show = showList.getJSONObject(i)
+                        val items = TvShow(show)
+                        //handler
+                        if(show.getString("overview") == ""){
+                            items.desc = "Description isn't Available in Your Current Language "
+                        }
+                        listItemShow.add(items)
+
+
+                    }
+
+                    listShow.postValue(listItemShow)
+
+
+                }catch (e:Exception){
+                    e.printStackTrace()
+                    log.d("Exception",e.message)
+                }
+
+            }
+
+            override fun onFailure(statusCode: Int, headers: Array<out Header>?, responseBody: ByteArray?, error: Throwable) {
+                log.d("OnFailure",error.message)
+            }
+
+        })
+    }
 }

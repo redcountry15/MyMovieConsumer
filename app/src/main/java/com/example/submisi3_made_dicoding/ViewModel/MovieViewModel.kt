@@ -29,13 +29,55 @@ class MovieViewModel: ViewModel() {
     get() = listMovie
 
     internal fun setMovie(){
-
-
         params.put("api_key", BuildConfig.API_KEY)
         params.put("language","en-US")
 
         val client = AsyncHttpClient()
         val url = "https://api.themoviedb.org/3/discover/movie?"
+
+        client.get(url,params,object :AsyncHttpResponseHandler(){
+            override fun onSuccess(statusCode: Int, headers: Array<out Header>?, responseBody: ByteArray) {
+                try {
+                    val result = String(responseBody)
+                    val response = JSONObject(result)
+                    val movieList = response.getJSONArray("results")
+
+                    for(i in 0 until movieList.length()){
+
+                        val movie = movieList.getJSONObject(i)
+                        val items = Movie(movie)
+                        //handler
+                        if (movie.getString("overview") == "" ){
+                            items.desc = " Description isn't Available in Your Current Language  "
+                        }
+                        listItemMovie.add(items)
+
+                    }
+
+                    listMovie.postValue(listItemMovie)
+
+
+                }catch (e:Exception){
+                    e.printStackTrace()
+                    Log.d("Exception",e.message!!)
+                }
+            }
+
+            override fun onFailure(statusCode: Int, headers: Array<out Header>?, responseBody: ByteArray?, error: Throwable) {
+                Log.d("OnFailure", error.message!!)
+            }
+
+        })
+
+    }
+
+    internal fun searchMovie(query:String){
+        params.put("api_key", BuildConfig.API_KEY)
+        params.put("language","en-US")
+        params.put("query",query)
+
+        val client = AsyncHttpClient()
+        val url = "https://api.themoviedb.org/3/search/movie?"
 
         client.get(url,params,object :AsyncHttpResponseHandler(){
             override fun onSuccess(statusCode: Int, headers: Array<out Header>?, responseBody: ByteArray) {

@@ -27,4 +27,9 @@
     <string name="search">Cari</string>
     <string name="_404_not_found">404 gak ketemu</string>
 
+    <string-array name="filter_array_search">
+        <item>Film</item>
+        <item>Seri Tv</item>
+    </string-array>
+
 </resources>

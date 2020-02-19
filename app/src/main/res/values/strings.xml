@@ -26,4 +26,9 @@
     <string name="search">Search</string>
     <string name="_404_not_found">404 not Found</string>
 
+    <string-array name="filter_array_search">
+        <item>Movie</item>
+        <item>TV Show</item>
+    </string-array>
+
 </resources>
