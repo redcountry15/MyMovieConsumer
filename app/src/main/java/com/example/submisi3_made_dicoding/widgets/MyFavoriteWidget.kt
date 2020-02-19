@@ -26,11 +26,11 @@ class MyFavoriteWidget : AppWidgetProvider() {
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,appWidgetId)
             intent.data = intent.toUri(Intent.URI_INTENT_SCHEME).toUri()
 
-            val views = RemoteViews(context.packageName, R.layout.item_widget)
+            val views = RemoteViews(context.packageName, R.layout.my_favorite_widget)
             views.setRemoteAdapter(R.id.stacko,intent)
             views.setEmptyView(R.id.stacko, R.id.mees_exc)
 
-            val toastIntent = Intent(context,FavoriteWidget::class.java)
+            val toastIntent = Intent(context,MyFavoriteWidget::class.java)
             toastIntent.action = TOAST_ACTION
             toastIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,appWidgetId)
             intent.data = intent.toUri(Intent.URI_INTENT_SCHEME).toUri()
@@ -54,7 +54,7 @@ class MyFavoriteWidget : AppWidgetProvider() {
             }else if(intent.action  == REFRESH_WIDGET){
                 val updateIntent = Intent(context,FavoriteWidgetService::class.java)
                 updateIntent.data = updateIntent.toUri(Intent.URI_INTENT_SCHEME).toUri()
-                val view = RemoteViews(context.packageName,R.layout.favorite_widget)
+                val view = RemoteViews(context.packageName,R.layout.my_favorite_widget)
                 view.setRemoteAdapter(R.id.stacko,updateIntent)
                 view.setEmptyView(R.id.stacko,R.id.mees_exc)
                 Toast.makeText(context,context.getString(R.string.refersh), Toast.LENGTH_LONG).show()

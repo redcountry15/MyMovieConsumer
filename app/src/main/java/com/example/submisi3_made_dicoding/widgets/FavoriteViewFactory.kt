@@ -14,6 +14,7 @@ import com.example.submisi3_made_dicoding.Model.Favorite
 import com.example.submisi3_made_dicoding.Model.Movie
 import com.example.submisi3_made_dicoding.Model.TvShow
 import com.example.submisi3_made_dicoding.R
+import com.example.submisi3_made_dicoding.db.DatabaseContract
 import com.example.submisi3_made_dicoding.db.MovieHelper
 import com.example.submisi3_made_dicoding.db.ShowHelper
 import java.lang.Exception
@@ -25,19 +26,13 @@ internal class FavoriteViewFactory(private val context:Context):RemoteViewsServi
 
     override fun onCreate() {}
 
-
-
     override fun getLoadingView(): RemoteViews? = null
-
 
     override fun getItemId(position: Int):Long = 0
 
 
     override fun onDataSetChanged() {
         val identifyToken = Binder.clearCallingIdentity()
-        movieHelper.open()
-        mWidgetItems.clear()
-        mWidgetItems.addAll(movieHelper.getAllMovie())
         Binder.restoreCallingIdentity(identifyToken)
     }
 
@@ -50,43 +45,74 @@ internal class FavoriteViewFactory(private val context:Context):RemoteViewsServi
             R.layout.item_widget
         )
 
-        val baseUrl = "https://image.tmdb.org/t/p/w500"
+        val baseUrl = "https://image.tmdb.org/t/p/w342"
         var widgetItems = mapCursorToArrayList()
         try{
             val bitmap:Bitmap = Glide.with(context)
                 .asBitmap()
-                .load(baseUrl + mWidgetItems[position].poster)
+                .load(baseUrl + widgetItems[position].poster)
                 .submit(500,500)
                 .get()
+            Log.d("DebugIsiFav", widgetItems[position].title)
             remoteViews.setImageViewBitmap(R.id.image_view_widget,bitmap)
         }catch (e:Exception){
             e.printStackTrace()
             Log.d("Something Wrong" , "Exception:$e")
         }
         val intention = Intent()
-        val extras = bundleOf(MyFavoriteWidget.EXTRA_ITEM to position,
-            MyFavoriteWidget.EXTRA_NAME to mWidgetItems[position].title)
+        val extras = bundleOf(MyFavoriteWidget.EXTRA_ITEM to widgetItems[position],
+            MyFavoriteWidget.EXTRA_NAME to widgetItems[position].title)
         intention.putExtras(extras)
         remoteViews.setOnClickFillInIntent(R.id.image_view_widget,intention)
         return  remoteViews
     }
 
-    private  fun mapCursorToArrayList():ArrayList<Movie>{
-        val movieHelper = MovieHelper(context)
-        movieHelper.open()
-        val movieList = ArrayList<Movie>()
-        val getAll = movieHelper.getAllMovie()
-        movieList.addAll(getAll)
-        return movieList
+    private fun mapCursorToArrayList(): ArrayList<Favorite> {
+        val favHelper = MovieHelper(context)
+        favHelper.open()
+        val cursor = favHelper.queryAll()
+        val favouritesList = ArrayList<Favorite>()
+        while (cursor.moveToNext()) {
+            val id =
+                cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.ObjectColumns.ID))
+            val title =
+                cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.ObjectColumns.TITLE))
+            val description = cursor.getString(
+                cursor.getColumnIndexOrThrow(
+                    DatabaseContract.ObjectColumns.DESCRIPTION
+                )
+            )
+            val rating =
+                cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.ObjectColumns.RATING))
+            val poster =
+                cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.ObjectColumns.POSTER))
+              val type =
+                cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.ObjectColumns.TYPE)
+            )
+
+            favouritesList.add(
+                Favorite(
+                    id,
+                    title,
+                    poster,
+                    description,
+                    rating,
+                    type
+                )
+            )
+        }
+        return favouritesList
     }
 
-    override fun getCount(): Int = mWidgetItems.size
+    override fun getCount(): Int = mapCursorToArrayList().size
 
 
     override fun getViewTypeCount(): Int  = 1
 
 
     override fun onDestroy() {}
+
+
 
 
 

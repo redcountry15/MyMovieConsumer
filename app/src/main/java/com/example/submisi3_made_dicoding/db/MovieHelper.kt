@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import com.example.submisi3_made_dicoding.Model.Movie
+import com.example.submisi3_made_dicoding.Model.TvShow
 import com.example.submisi3_made_dicoding.R
 import com.example.submisi3_made_dicoding.db.DatabaseContract.ObjectColumns.Companion.DESCRIPTION
 import com.example.submisi3_made_dicoding.db.DatabaseContract.ObjectColumns.Companion.ID
@@ -68,7 +69,7 @@ class MovieHelper(context:Context) {
         val cursor = database.query(
             DATABASE_TABLE,
             null,
-            null,
+            "type = 'movie'",
             null,
             null,
             null,
@@ -121,4 +122,18 @@ class MovieHelper(context:Context) {
     fun deleteMovie(id:String):Int{
         return  database.delete(DATABASE_TABLE,"$ID = ?", arrayOf(id))
     }
+
+    fun queryAll(): Cursor {
+        return database.query(
+            DATABASE_TABLE,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "$ID ASC",
+            null
+        )
+    }
+
 }

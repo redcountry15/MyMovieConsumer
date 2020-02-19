@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.submisi3_made_dicoding.Model.Movie
 import com.example.submisi3_made_dicoding.Model.TvShow
+import com.example.submisi3_made_dicoding.db.DatabaseContract.ObjectColumns.Companion.TABLE_NAME
 import com.example.submisi3_made_dicoding.db.DatabaseContract.ShowObjectColumns.Companion.ID
 import com.example.submisi3_made_dicoding.db.DatabaseContract.ShowObjectColumns.Companion.TABLE_NAME_FAVORITE
 import java.sql.SQLException
@@ -18,7 +19,7 @@ class ShowHelper(context: Context) {
 
     companion object{
         @Volatile private var INSTANCE: ShowHelper? = null
-        private  const val DATABASE_TABLE = TABLE_NAME_FAVORITE
+        private  const val DATABASE_TABLE = TABLE_NAME
 
         fun getInstance(context: Context): ShowHelper {
             if(INSTANCE  == null){
@@ -87,6 +88,8 @@ class ShowHelper(context: Context) {
 
     }
 
+
+
     fun insertShow(values: ContentValues): Long{
         return  database.insert(DATABASE_TABLE,null,values)
     }
@@ -96,7 +99,7 @@ class ShowHelper(context: Context) {
         val cursor = database.query(
             DATABASE_TABLE,
             null,
-            null,
+            "type = 'show'",
             null,
             null,
             null,
@@ -110,10 +113,10 @@ class ShowHelper(context: Context) {
             do{
                 show = TvShow(
                     cursor.getString(cursor.getColumnIndexOrThrow(ID)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.ShowObjectColumns.TITLE)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.ShowObjectColumns.POSTER)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.ShowObjectColumns.DESCRIPTION)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.ShowObjectColumns.RATING))
+                    cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.ObjectColumns.TITLE)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.ObjectColumns.POSTER)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.ObjectColumns.DESCRIPTION)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.ObjectColumns.RATING))
                 )
                 arrayList.add(show)
                 cursor.moveToNext()

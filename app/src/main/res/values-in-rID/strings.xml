@@ -24,5 +24,7 @@
     <string name="excp_widget">Gabut disini juga</string>
     <string name="appwidget_text">Contoh</string>
     <string name="add_widget">Tambah widget</string>
+    <string name="search">Cari</string>
+    <string name="_404_not_found">404 gak ketemu</string>
 
 </resources>

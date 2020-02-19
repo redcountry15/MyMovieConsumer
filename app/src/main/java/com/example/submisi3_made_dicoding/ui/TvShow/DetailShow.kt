@@ -25,7 +25,7 @@ class DetailShow : AppCompatActivity() {
     }
 
     lateinit var show:TvShow
-    lateinit var showHelper: ShowHelper
+    lateinit var movieHelper: MovieHelper
     lateinit var  type:String
     lateinit var  typeGet:String
     lateinit var  id: String
@@ -43,8 +43,8 @@ class DetailShow : AppCompatActivity() {
         typeGet = intent.getStringExtra(DATA_TYPE)
         show = intent.getParcelableExtra(DATA_SHOW)
 
-        showHelper = ShowHelper.getInstance(applicationContext)
-        showHelper.open()
+        movieHelper = MovieHelper.getInstance(applicationContext)
+        movieHelper.open()
 
         progressBarDetail.visibility = View.VISIBLE
         if (intentShow != null){
@@ -106,7 +106,7 @@ class DetailShow : AppCompatActivity() {
 
         img_button_favorite.setImageResource(R.drawable.ic_favorite_black_24dp)
         if (typeGet == SHOW) {
-            val result = showHelper.insertShow(values)
+            val result = movieHelper.insertMovie(values)
             if (result > 0) {
                 Toast.makeText(applicationContext, getString(R.string.movieIsSucessfullyAdded), Toast.LENGTH_LONG).show()
                 isFavorite = isFavorited()
@@ -117,14 +117,14 @@ class DetailShow : AppCompatActivity() {
     }
 
     fun isFavorited():Boolean{
-        if (showHelper.isShowFavorited(show.id)) {
+        if (movieHelper.isMovieFavorited(show.id)) {
             return true
         }
         return false
     }
 
     private fun check():Boolean{
-        val cursor = showHelper.queryById(show.id)
+        val cursor = movieHelper.queryById(show.id)
         if(cursor.moveToFirst()) return false
         cursor.close()
         return true
