@@ -5,8 +5,7 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
-import android.content.LocusId
-import android.widget.RemoteViews
+ import android.widget.RemoteViews
 import android.widget.Toast
 import androidx.core.net.toUri
 import com.example.submisi3_made_dicoding.R
@@ -26,10 +25,7 @@ class FavoriteWidget: AppWidgetProvider() {
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,appWidgetId)
         intent.data = intent.toUri(Intent.URI_INTENT_SCHEME).toUri()
 
-        val views = RemoteViews(
-            context.packageName,
-            R.layout.item_widget
-        )
+        val views = RemoteViews(context.packageName, R.layout.item_widget)
         views.setRemoteAdapter(R.id.stacko,intent)
         views.setEmptyView(R.id.stacko,R.id.mees_exc)
 
@@ -63,6 +59,8 @@ class FavoriteWidget: AppWidgetProvider() {
             if (intent.action == TOAST_ACTION){
                 val index = intent.getIntExtra(EXTRA_ITEM,0)
                 val title = intent.getStringExtra(EXTRA_NAME)
+                Toast.makeText(context, "Hey$index$title",Toast.LENGTH_LONG).show()
+
             }else if(intent.action  == REFRESH_WIDGET){
                 val updateIntent = Intent(context,FavoriteWidgetService::class.java)
                 updateIntent.data = updateIntent.toUri(Intent.URI_INTENT_SCHEME).toUri()
@@ -74,11 +72,7 @@ class FavoriteWidget: AppWidgetProvider() {
         }
     }
 
-    override fun onDisabled(context: Context?) {
-        //leave it as empty constructor
-    }
+    override fun onDisabled(context: Context?) {}
 
-    override fun onEnabled(context: Context?) {
-        //leave it as empty constructor
-    }
+    override fun onEnabled(context: Context?) {}
 }

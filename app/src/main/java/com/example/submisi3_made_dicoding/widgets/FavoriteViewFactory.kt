@@ -1,12 +1,14 @@
 package com.example.submisi3_made_dicoding.widgets
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Binder
 import android.util.Log
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import androidx.annotation.RequiresApi
+import androidx.core.os.bundleOf
 import com.bumptech.glide.Glide
 import com.example.submisi3_made_dicoding.Model.Favorite
 import com.example.submisi3_made_dicoding.Model.Movie
@@ -17,21 +19,25 @@ import com.example.submisi3_made_dicoding.db.ShowHelper
 import java.lang.Exception
 
 internal class FavoriteViewFactory(private val context:Context):RemoteViewsService.RemoteViewsFactory {
-    private var bipmap: Bitmap? = null
 
-    override fun onCreate() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    private val mWidgetItems = ArrayList<Movie>()
+    lateinit var  movieHelper: MovieHelper
+
+    override fun onCreate() {}
+
+
 
     override fun getLoadingView(): RemoteViews? = null
 
 
-    override fun getItemId(position: Int): Long {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getItemId(position: Int):Long = 0
+
 
     override fun onDataSetChanged() {
         val identifyToken = Binder.clearCallingIdentity()
+        movieHelper.open()
+        mWidgetItems.clear()
+        mWidgetItems.addAll(movieHelper.getAllMovie())
         Binder.restoreCallingIdentity(identifyToken)
     }
 
@@ -46,11 +52,10 @@ internal class FavoriteViewFactory(private val context:Context):RemoteViewsServi
 
         val baseUrl = "https://image.tmdb.org/t/p/w500"
         var widgetItems = mapCursorToArrayList()
-
         try{
             val bitmap:Bitmap = Glide.with(context)
                 .asBitmap()
-                .load(baseUrl + widgetItems[position].poster)
+                .load(baseUrl + mWidgetItems[position].poster)
                 .submit(500,500)
                 .get()
             remoteViews.setImageViewBitmap(R.id.image_view_widget,bitmap)
@@ -58,6 +63,11 @@ internal class FavoriteViewFactory(private val context:Context):RemoteViewsServi
             e.printStackTrace()
             Log.d("Something Wrong" , "Exception:$e")
         }
+        val intention = Intent()
+        val extras = bundleOf(MyFavoriteWidget.EXTRA_ITEM to position,
+            MyFavoriteWidget.EXTRA_NAME to mWidgetItems[position].title)
+        intention.putExtras(extras)
+        remoteViews.setOnClickFillInIntent(R.id.image_view_widget,intention)
         return  remoteViews
     }
 
@@ -65,26 +75,21 @@ internal class FavoriteViewFactory(private val context:Context):RemoteViewsServi
         val movieHelper = MovieHelper(context)
         movieHelper.open()
         val movieList = ArrayList<Movie>()
-        val geAll = movieHelper.getAllMovie()
-        movieList.addAll(geAll)
+        val getAll = movieHelper.getAllMovie()
+        movieList.addAll(getAll)
         return movieList
     }
 
-    private  fun showMapCursorToArrayList():ArrayList<TvShow>{
-        val showHelper = ShowHelper(context)
-        showHelper.open()
-        val showList = ArrayList<TvShow>()
-        val geAll = showHelper.getAllShow()
-        showList.addAll(geAll)
-        return showList
-    }
-
-    override fun getCount(): Int = mapCursorToArrayList().size
+    override fun getCount(): Int = mWidgetItems.size
 
 
     override fun getViewTypeCount(): Int  = 1
 
 
     override fun onDestroy() {}
+
+
+
+
 
 }

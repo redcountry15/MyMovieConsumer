@@ -22,5 +22,7 @@
     <string name="refersh">Menyegarkan....</string>
     <string name="favorite_widgets">Favorite ke Widget</string>
     <string name="excp_widget">Gabut disini juga</string>
+    <string name="appwidget_text">Contoh</string>
+    <string name="add_widget">Tambah widget</string>
 
 </resources>

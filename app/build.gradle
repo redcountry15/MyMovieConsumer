@@ -45,6 +45,7 @@ dependencies {
     annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.2.0-alpha04'
 //rcview
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    //asynctask
     implementation 'com.loopj.android:android-async-http:1.4.9'
     //nav
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.0'
